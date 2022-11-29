@@ -16,7 +16,7 @@ mybatis-plus:
 
 # 应用服务 WEB 访问端口
 server:
-  port: 8084
+  port: 12000
 
 
 

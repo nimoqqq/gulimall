@@ -16,7 +16,6 @@ import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
 
-
 /**
  * 优惠券信息
  *
@@ -30,12 +29,19 @@ public class CouponController {
     @Autowired
     private CouponService couponService;
 
+    @RequestMapping("/member/list")
+    public R membercoupons() {
+        CouponEntity coupon = new CouponEntity();
+        coupon.setCouponName("满 100 减 10");
+        return R.ok().put("coupons",Arrays.asList(coupon));
+    }
+
     /**
      * 列表
      */
     @RequestMapping("/list")
     // @RequiresPermissions("coupon:coupon:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = couponService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -47,8 +53,8 @@ public class CouponController {
      */
     @RequestMapping("/info/{id}")
     // @RequiresPermissions("coupon:coupon:info")
-    public R info(@PathVariable("id") Long id){
-		CouponEntity coupon = couponService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        CouponEntity coupon = couponService.getById(id);
 
         return R.ok().put("coupon", coupon);
     }
@@ -58,8 +64,8 @@ public class CouponController {
      */
     @RequestMapping("/save")
     // @RequiresPermissions("coupon:coupon:save")
-    public R save(@RequestBody CouponEntity coupon){
-		couponService.save(coupon);
+    public R save(@RequestBody CouponEntity coupon) {
+        couponService.save(coupon);
 
         return R.ok();
     }
@@ -69,8 +75,8 @@ public class CouponController {
      */
     @RequestMapping("/update")
     // @RequiresPermissions("coupon:coupon:update")
-    public R update(@RequestBody CouponEntity coupon){
-		couponService.updateById(coupon);
+    public R update(@RequestBody CouponEntity coupon) {
+        couponService.updateById(coupon);
 
         return R.ok();
     }
@@ -80,8 +86,8 @@ public class CouponController {
      */
     @RequestMapping("/delete")
     // @RequiresPermissions("coupon:coupon:delete")
-    public R delete(@RequestBody Long[] ids){
-		couponService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        couponService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

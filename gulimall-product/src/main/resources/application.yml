@@ -1,7 +1,5 @@
 # 应用名称
 spring:
-  application:
-    name: gulimall-product
   datasource:
     username: root
     password: 123456

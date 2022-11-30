@@ -9,3 +9,5 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
         prefix: ${spring.application.name}
+        namespace: 2de362bf-3c9e-4c6c-ae5b-4b459fd9ab51
+        group: DEV_GROUP

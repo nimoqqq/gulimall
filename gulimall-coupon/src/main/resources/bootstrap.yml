@@ -11,3 +11,10 @@ spring:
         prefix: ${spring.application.name}
         namespace: 2de362bf-3c9e-4c6c-ae5b-4b459fd9ab51
         group: DEV_GROUP
+        extension-configs:
+          - data-id: datasource.yaml
+            group: DEV_GROUP
+          - data-id: mybatis.yaml
+            group: DEV_GROUP
+          - data-id: other.yaml
+            group: DEV_GROUP

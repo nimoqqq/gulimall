@@ -1,0 +1,20 @@
+# 应用名称
+spring:
+  application:
+    name: gulimall-gateway
+
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        prefix: ${spring.application.name}
+        namespace: c8037450-6cc1-4d48-9dd5-90c1b1f809ec
+        group: DEV_GROUP
+        extension-configs:
+          - data-id: datasource.yaml
+            group: DEV_GROUP
+          - data-id: mybatis.yaml
+            group: DEV_GROUP
+          - data-id: other.yaml
+            group: DEV_GROUP

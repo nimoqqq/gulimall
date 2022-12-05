@@ -4,6 +4,7 @@ import com.aliyun.oss.OSS;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
+import com.atguigu.common.utils.R;
 import org.codehaus.jettison.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +41,7 @@ public class OssController {
     private String accessId;
 
     @RequestMapping("oss/policy")
-    public Map<String, String> policy() {
+    public R policy() {
 
         // 填写Host地址，格式为https://bucketname.endpoint。
         String host = "https://" + bucket + "." + endpoint;
@@ -49,6 +50,7 @@ public class OssController {
         String format = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String dir = format + "/";
 
+        Map<String, String> respMap = null;
         try {
             long expireTime = 30;
             long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
@@ -62,7 +64,7 @@ public class OssController {
             String encodedPolicy = BinaryUtil.toBase64String(binaryData);
             String postSignature = ossClient.calculatePostSignature(postPolicy);
 
-            Map<String, String> respMap = new LinkedHashMap<>();
+            respMap = new LinkedHashMap<>();
             respMap.put("accessId", accessId);
             respMap.put("policy", encodedPolicy);
             respMap.put("signature", postSignature);
@@ -76,10 +78,9 @@ public class OssController {
             jasonCallback.put("callbackBodyType", "application/x-www-form-urlencoded");
             String base64CallbackBody = BinaryUtil.toBase64String(jasonCallback.toString().getBytes());
             respMap.put("callback", base64CallbackBody);
-            return respMap;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return new HashMap<>();
+        return R.ok().put("data", respMap);
     }
 }

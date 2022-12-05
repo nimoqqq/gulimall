@@ -6,11 +6,19 @@ spring:
     gateway:
       routes:
         - id: product_route
-            uri: lb://gulimall-product
-            predicates:
-              - Path=/api/product/**
-            filters:
-              - RewritePath=/api/(?<segment>.*), /$\{segment}
+          uri: lb://gulimall-product
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
+        - id: thirdParty_route
+          uri: lb://gulimall-third-party
+          predicates:
+            - Path=/api/third/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /$\{segment}
+
         - id: admin_route
           uri: lb://renren-fast
           predicates:

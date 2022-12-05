@@ -1,0 +1,17 @@
+# 应用名称
+spring:
+  application:
+    name: gulimall-third-party
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yaml
+        prefix: ${spring.application.name}
+        namespace: cd30703e-7dd1-4e9e-a75a-69dc226e6542
+        group: dev
+        extension-configs:
+          - data-id: other.yaml
+            group: dev
+          - data-id: oss.yaml
+            group: dev

@@ -5,14 +5,19 @@ spring:
         server-addr: 127.0.0.1:8848
     gateway:
       routes:
-        - id: between_route
-          uri: https://www.baidu.com
+        - id: admin_rout
+          uri: lb://renren-fast
           predicates:
-            - Query=url,baidu
-        - id: between_route
-          uri: https://www.baidu.com
-          predicates:
-            - Query=url,qq
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*), /renren-fast/$\{segment}
+
+        - id: admin_rout
+            uri: lb://renren-fast
+            predicates:
+              - Path=/api/product/**
+            filters:
+              - RewritePath=/api/(?<segment>.*), /$\{segment}
 
 # 应用服务 WEB 访问端口
 server:

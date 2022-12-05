@@ -9,3 +9,12 @@ spring:
         server-addr: 127.0.0.1:8848
         file-extension: yaml
         prefix: ${spring.application.name}
+        namespace: c69cdfe8-d930-4066-a125-b2417ba54c75
+        group: dev
+        extension-configs:
+          - data-id: mybatis.yaml
+            group: dev
+          - data-id: other.yaml
+            group: dev
+          - data-id: datasource.yaml
+            group: dev
